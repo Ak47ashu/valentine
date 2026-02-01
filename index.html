@@ -11,6 +11,7 @@ justify-content: center;
 align-items: center;
 background: #ffe6eb;
 font-family: Arial, sans-serif;
+overflow: hidden;
 }
 .box {
 text-align: center;
@@ -26,50 +27,86 @@ border: none;
 border-radius: 8px;
 cursor: pointer;
 }
-#yes {
+#yes, #yes2 {
 background-color: #ff4d79;
 color: white;
 }
-#no {
+#no, #no2 {
 background-color: #999;
 color: white;
 position: absolute;
 }
-#gif {
+.hidden {
 display: none;
-margin-top: 20px;
 }
 img {
 width: 250px;
 border-radius: 10px;
+margin-top: 20px;
 }
 </style>
 </head>
 <body>
+
 <div class="box">
+
+<!-- Step 1 -->
+<div id="step1">
 <h1>Will you be my Valentine, Arpita? ❤️</h1>
 <button id="yes">Yes</button>
 <button id="no">No</button>
-<div id="gif">
+</div>
+
+<!-- Step 2 -->
+<div id="step2" class="hidden">
+<h1>Give me first vitamin goli 😋</h1>
+<button id="yes2">Yes</button>
+<button id="no2">No</button>
+</div>
+
+<!-- Final GIF -->
+<div id="final" class="hidden">
 <h2>You had no choice 😂💖</h2>
 <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" alt="Funny Gif">
 </div>
-</div>
-<script>
-const noButton = document.getElementById("no");
-const yesButton = document.getElementById("yes");
-const gifDiv = document.getElementById("gif");
 
-noButton.addEventListener("mouseover", () => {
+</div>
+
+<script>
+// Buttons
+const no1 = document.getElementById("no");
+const no2 = document.getElementById("no2");
+const yes1 = document.getElementById("yes");
+const yes2 = document.getElementById("yes2");
+
+const step1 = document.getElementById("step1");
+const step2 = document.getElementById("step2");
+const final = document.getElementById("final");
+
+// Function to move No buttons
+function moveButton(btn) {
+btn.addEventListener("mouseover", () => {
 const x = Math.random() * (window.innerWidth - 100);
 const y = Math.random() * (window.innerHeight - 50);
-noButton.style.left = x + "px";
-noButton.style.top = y + "px";
+btn.style.left = x + "px";
+btn.style.top = y + "px";
+});
+}
+
+moveButton(no1);
+moveButton(no2);
+
+// Step transitions
+yes1.addEventListener("click", () => {
+step1.classList.add("hidden");
+step2.classList.remove("hidden");
 });
 
-yesButton.addEventListener("click", () => {
-gifDiv.style.display = "block";
+yes2.addEventListener("click", () => {
+step2.classList.add("hidden");
+final.classList.remove("hidden");
 });
 </script>
+
 </body>
 </html>
